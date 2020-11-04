@@ -2862,19 +2862,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\user\\.nuget\\packages\\": {}
+    "C:\\Users\\Kanika\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MFPE\\CalculateNetWorthApi\\CalculateNetWorthApi.csproj",
+      "projectUniqueName": "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\CalculateNetWorthApi\\CalculateNetWorthApi.csproj",
       "projectName": "CalculateNetWorthApi",
-      "projectPath": "D:\\MFPE\\CalculateNetWorthApi\\CalculateNetWorthApi.csproj",
-      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "D:\\MFPE\\CalculateNetWorthApi\\obj\\",
+      "projectPath": "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\CalculateNetWorthApi\\CalculateNetWorthApi.csproj",
+      "packagesPath": "C:\\Users\\Kanika\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\CalculateNetWorthApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Kanika\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
