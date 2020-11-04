@@ -17,10 +17,7 @@ namespace DailySharePriceApi.Repository
             new Stock { StockId = 102, StockName = "ETH", StockValue = 40.2},
             new Stock {StockId = 103, StockName = "LTC", StockValue = 23.6}
         };
-        public List<Stock> GetStock()
-        {
-            return stocks.ToList();
-        }
+       
         public Stock GetStockByName(string name)
         {
             var stock = stocks.FirstOrDefault(s => s.StockName == name);
@@ -31,18 +28,6 @@ namespace DailySharePriceApi.Repository
             else
             {
                 return stock;
-            }
-        }
-        public Stock AddStock(Stock s1)
-        {
-            if(s1 == null)
-            {
-                return null;
-            }
-            else
-            {
-                stocks.Add(s1);
-                return s1;
             }
         }
     }

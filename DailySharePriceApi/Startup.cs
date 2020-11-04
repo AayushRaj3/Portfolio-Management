@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DailySharePriceApi.Provider;
 using DailySharePriceApi.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,8 @@ namespace DailySharePriceApi
 
             services.AddScoped<IStockRepository, StockRepository>();
 
+            services.AddScoped<IStockProvider, StockProvider>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My Stock API", Version = "v1" });
@@ -37,7 +40,7 @@ namespace DailySharePriceApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -47,6 +50,8 @@ namespace DailySharePriceApi
             app.UseSwagger();
 
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Stock API V1"); });
+
+            loggerFactory.AddLog4Net();
 
             app.UseRouting();
 

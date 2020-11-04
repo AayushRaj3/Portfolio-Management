@@ -9,8 +9,6 @@ namespace DailySharePriceApi.Repository
 {
     public interface IStockRepository
     {
-        public List<Stock> GetStock();
         public Stock GetStockByName(string name);
-        public Stock AddStock(Stock s1);
     }
 }
