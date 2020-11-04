@@ -7,7 +7,7 @@ namespace CalculateNetWorthApi.Models
 {
     public class PortFolioDetails
     {
-        public string PortFolioId { get; set; }
+        public int PortFolioId { get; set; }
 
         public List<StockDetails> StockList { get; set; }
 

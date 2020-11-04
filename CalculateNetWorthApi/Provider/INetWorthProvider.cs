@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CalculateNetWorthApi.Repository
+namespace CalculateNetWorthApi.Provider
 {
-    public interface INetWorthRepository
+    public interface INetWorthProvider
     {
         public Task<double> calculateNetWorthAsync(PortFolioDetails pd);
 

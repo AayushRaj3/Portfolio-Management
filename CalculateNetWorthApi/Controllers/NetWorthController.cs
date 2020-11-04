@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CalculateNetWorthApi.Models;
+using CalculateNetWorthApi.Provider;
 using CalculateNetWorthApi.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,44 +17,29 @@ namespace CalculateNetWorthApi.Controllers
     {
         static readonly log4net.ILog _log4net = log4net.LogManager.GetLogger(typeof(NetWorthController));
 
-        private readonly INetWorthRepository _netWorthRepository;
+        private readonly INetWorthProvider _netWorthProvider;
 
-        public NetWorthController(INetWorthRepository netWorthRepository)
+        public NetWorthController(INetWorthProvider ip)
         {
-            _netWorthRepository = netWorthRepository;
-        }
-
-        // GET: api/<NetWorthController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+            _netWorthProvider = ip;
         }
 
         // GET api/<NetWorthController>/5
-        [HttpGet("{pd}")]
+        //[HttpGet("{id}")]
+        [HttpPost]
+        [Route("Get")]
         public Task<double> Get(PortFolioDetails pd)
         {
-            return _netWorthRepository.calculateNetWorthAsync(pd);
+            return _netWorthProvider.calculateNetWorthAsync(pd);
         }
 
         // POST api/<NetWorthController>
         [HttpPost]
-        public AssetSaleResponse Post(PortFolioDetails current, PortFolioDetails toSell)
+        [Route("Sell")]
+        public AssetSaleResponse Post(List<PortFolioDetails> both)
         {
-            return _netWorthRepository.sellAssets(current, toSell);
+            return _netWorthProvider.sellAssets(both);
         }
 
-        // PUT api/<NetWorthController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<NetWorthController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
