@@ -18,7 +18,15 @@ namespace DailySharePriceApi.Provider
         }
         public Stock GetStockByName(string name)
         {
-            return repo.GetStockByName(name);
+            var data = repo.GetStockByName(name);
+            if(data == null)
+            {
+                return null;
+            }
+            else
+            {
+                return data;
+            }
         }
     }
 }
