@@ -8,8 +8,10 @@ namespace CalculateNetWorthApi.Provider
 {
     public interface INetWorthProvider
     {
-        public Task<double> calculateNetWorthAsync(PortFolioDetails pd);
+        public Task<NetWorth> calculateNetWorthAsync(PortFolioDetails portFolioDetails);
 
         public AssetSaleResponse sellAssets(List<PortFolioDetails> both);
+
+        public PortFolioDetails GetPortFolioDetailsByID(int id);
     }
 }

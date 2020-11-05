@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using CustomerPortal.Models;
@@ -16,41 +17,13 @@ namespace CustomerPortal.Controllers
 {
     public class PortFolioController : Controller
     {
-        double nw;
-        public List<PortFolioDetails> _portFolioDetails = new List<PortFolioDetails>()
-            {
-                new PortFolioDetails{PortFolioId=12345,
-                    MutualFundList = new List<MutualFundDetails>()
-                    {
-                        new MutualFundDetails{MutualFundName = "Cred", MutualFundUnits=34},
-                        new MutualFundDetails{MutualFundName = "Viva", MutualFundUnits=566}
-                    },
-                    StockList = new List<StockDetails>()
-                    {
-                        new StockDetails{StockCount = 1, StockName = "BTC"},
-                        new StockDetails{StockCount = 6, StockName = "ETH"}
-                    }
-                },
-                new PortFolioDetails
-                {
-                    PortFolioId = 789,
-                    MutualFundList = new List<MutualFundDetails>()
-                    {
-                        new MutualFundDetails{MutualFundName = "Udaan", MutualFundUnits=34},
-                        new MutualFundDetails{MutualFundName = "Viva", MutualFundUnits=566}
-                    },
-                    StockList = new List<StockDetails>()
-                    {
-                        new StockDetails{StockCount = 240, StockName = "BTC"},
-                        new StockDetails{StockCount = 46, StockName = "LTC"}
-                    }
-                }
-            };
+        static double nw = 0;
 
+        PortFolioDetails _portFolioDetails;
         
         public PortFolioController()
         {
-           
+            _portFolioDetails = new PortFolioDetails();
         }
         public bool CheckValid()
         {
@@ -65,37 +38,38 @@ namespace CustomerPortal.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            NetWorth _netWorth = new NetWorth();
             if (CheckValid())
             {
                 CompleteDetails cd = new CompleteDetails();
-                PortFolioDetails simp = new PortFolioDetails();
+                PortFolioDetails portFolioDetails = new PortFolioDetails();
                 int id = Convert.ToInt32(HttpContext.Session.GetString("Id"));
-                simp = _portFolioDetails.FirstOrDefault(obj => obj.PortFolioId == id);
-                cd.PFId = simp.PortFolioId;
-                cd.FinalMutualFundList = simp.MutualFundList;
-                cd.FinalStockList = simp.StockList;
-                nw = 0;
-                /*
-                using (var httpClient = new HttpClient())
-                {
-                    using (var response = await httpClient.GetAsync("https://localhost:44375/api/NetWorth/" + id))
-                    {
-                        string apiResponse = await response.Content.ReadAsStringAsync();
-                         nw = Convert.ToDouble(apiResponse);
-                    }
-                }*/
 
-                StringContent content = new StringContent(JsonConvert.SerializeObject(simp), Encoding.UTF8, "application/json");
                 using (var client = new HttpClient())
                 {
-                    using (var response = await client.PostAsync("https://localhost:44375/api/NetWorth/GetNetWorth/", content))
+                    using (var response = await client.GetAsync("https://localhost:44375/api/NetWorth/" + id))
                     {
                         string apiResponse = await response.Content.ReadAsStringAsync();
-                        nw = Convert.ToDouble(apiResponse);
+                        portFolioDetails = JsonConvert.DeserializeObject<PortFolioDetails>(apiResponse);
                         //ord = o[0];
                     }
                 }
-                cd.NetWorth = nw;
+                StringContent content = new StringContent(JsonConvert.SerializeObject(portFolioDetails), Encoding.UTF8, "application/json");
+                using (var client = new HttpClient())
+                {
+                    using (var response = await client.PostAsync("https://localhost:44375/api/NetWorth/", content))
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        _netWorth = JsonConvert.DeserializeObject<NetWorth>(apiResponse); ;
+                        
+                    }
+                }
+                
+                cd.PFId = portFolioDetails.PortFolioId;
+                cd.FinalMutualFundList = portFolioDetails.MutualFundList;
+                cd.FinalStockList = portFolioDetails.StockList;
+
+                cd.NetWorth = _netWorth.networth;
                 
                 return View(cd);
             }
@@ -132,7 +106,16 @@ namespace CustomerPortal.Controllers
             PortFolioDetails current = new PortFolioDetails();
             PortFolioDetails toSell = new PortFolioDetails();
             int id = Convert.ToInt32(HttpContext.Session.GetString("Id"));
-            current = _portFolioDetails.FirstOrDefault(e => e.PortFolioId == id);
+
+            using (var client = new HttpClient())
+            {
+                using (var response = await client.GetAsync("https://localhost:44375/api/NetWorth/" + id))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    current = JsonConvert.DeserializeObject<PortFolioDetails>(apiResponse);
+                    //ord = o[0];
+                }
+            }
             toSell.PortFolioId = id;
             toSell.StockList = new List<StockDetails>
             {
@@ -157,28 +140,7 @@ namespace CustomerPortal.Controllers
                     //ord = o[0];
                 }
             }
-            if (assetSaleResponse.SaleStatus == true)
-            {
-                foreach (PortFolioDetails x in _portFolioDetails)
-                {
-                    if (x.PortFolioId == id)
-                    {
-                        foreach (StockDetails m in x.StockList)
-                        {
-                            if (m.StockName == sd.StockName)
-                            {
-                                m.StockCount = m.StockCount - sd.StockCount;
-                                if (m.StockCount == 0)
-                                {
-                                    x.StockList.Remove(m);
-                                }
-                                break;
-                            }
-                        }
-                    }
-                }
-
-            }     
+            nw = assetSaleResponse.Networth;
             return View("Reciept", assetSaleResponse);
         }
 
@@ -188,7 +150,16 @@ namespace CustomerPortal.Controllers
             PortFolioDetails current = new PortFolioDetails();
             PortFolioDetails toSell = new PortFolioDetails();
             int id = Convert.ToInt32(HttpContext.Session.GetString("Id"));
-            current = _portFolioDetails.FirstOrDefault(e => e.PortFolioId == id);
+
+            using (var client = new HttpClient())
+            {
+                using (var response = await client.GetAsync("https://localhost:44375/api/NetWorth/" + id))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    current = JsonConvert.DeserializeObject<PortFolioDetails>(apiResponse);
+                    //ord = o[0];
+                }
+            }
             toSell.PortFolioId = id;
             toSell.MutualFundList = new List<MutualFundDetails>
             {
@@ -206,38 +177,19 @@ namespace CustomerPortal.Controllers
             StringContent content = new StringContent(JsonConvert.SerializeObject(list), Encoding.UTF8, "application/json");
             using (var client = new HttpClient())
             {
-                using (var response = await client.PostAsync("https://localhost:44375/api/NetWorth/SellAssets/", content))
+                using (var response = await client.PostAsync("https://localhost:44375/api/NetWorth/SellAssets", content))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     assetSaleResponse = JsonConvert.DeserializeObject<AssetSaleResponse>(apiResponse);
                     //ord = o[0];
                 }
             }
-            if (assetSaleResponse.SaleStatus == true)
-            {
-                foreach (PortFolioDetails x in _portFolioDetails)
-                {
-                    if (x.PortFolioId == id)
-                    {
-                        foreach (MutualFundDetails m in x.MutualFundList)
-                        {
-                            if (m.MutualFundName == md.MutualFundName)
-                            {
-                                m.MutualFundUnits = m.MutualFundUnits - md.MutualFundUnits;
-                                if (m.MutualFundUnits == 0)
-                                {
-                                    x.MutualFundList.Remove(m);
-                                }
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
+             
+            
             return View("Reciept", assetSaleResponse);
         }
 
-
+        /*
 
         [HttpPost]
         public async Task<IActionResult> Buy(SellingViewModel svm)
@@ -319,5 +271,6 @@ namespace CustomerPortal.Controllers
             }
             return View("Reciept", assetSaleResponse);
         }
+        */
     }
 }

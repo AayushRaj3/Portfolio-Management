@@ -19,27 +19,86 @@ namespace CalculateNetWorthApi.Controllers
 
         private readonly INetWorthProvider _netWorthProvider;
 
-        public NetWorthController(INetWorthProvider ip)
+        public NetWorthController(INetWorthProvider netWorthProvider)
         {
-            _netWorthProvider = ip;
+            _netWorthProvider = netWorthProvider;
+        }
+
+        [HttpGet("{id}")]
+        //[Route("GetPortFolio")]
+        public PortFolioDetails GetPortFolioDetailsByID(int id)
+        {
+            return _netWorthProvider.GetPortFolioDetailsByID(id);
         }
 
         // GET api/<NetWorthController>/5
-        //[HttpGet("{id}")]
         [HttpPost]
-        [Route("Get")]
-        public Task<double> Get(PortFolioDetails pd)
+        //[Route("GetNetWorth")]
+        public IActionResult GetNetWorth(PortFolioDetails portFolioDetails)
         {
-            return _netWorthProvider.calculateNetWorthAsync(pd);
+
+            NetWorth _netWorth = new NetWorth();
+            _log4net.Info("Calculating the networth");
+
+            try
+            {
+                //if(HttpContext.Request.Body == null)
+                //{
+                //    return BadRequest("Please provide a valid PortFolio");
+
+                //}
+                //else if (portFolioDetails.ToString() == "")
+                //{
+                //    return BadRequest("Please provide a valid PortFolio");
+                //}
+
+                //else if(portFolioDetails.MutualFundList==null && portFolioDetails.StockList == null)
+                //{
+                //    _log4net.Info("Both The lists are empty");
+                //    return BadRequest("The customer doesn't hold any assets");
+                //}
+
+                _netWorth = _netWorthProvider.calculateNetWorthAsync(portFolioDetails).Result;
+                return Ok(_netWorth);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST api/<NetWorthController>
         [HttpPost]
-        [Route("Sell")]
-        public AssetSaleResponse Post(List<PortFolioDetails> both)
+        [Route("SellAssets")]
+        public IActionResult SellAssets(List<PortFolioDetails> listOfAssetsCurrentlyHoldingAndAssetsToSell)
         {
-            return _netWorthProvider.sellAssets(both);
+            try
+            {
+                _log4net.Info("Selling some assets");
+                AssetSaleResponse assetSaleResponse = new AssetSaleResponse();
+                if (listOfAssetsCurrentlyHoldingAndAssetsToSell == null)
+                {
+                    return BadRequest("Please Provide a Valid List of portFolios");
+                }
+                else
+                {
+                    assetSaleResponse = _netWorthProvider.sellAssets(listOfAssetsCurrentlyHoldingAndAssetsToSell);
+                    if (assetSaleResponse == null)
+                    {
+                        _log4net.Info("Couldn't be sold because of invalid portfolio");
+                        return BadRequest("Please provide a valid list of portfolios");
+                    }
+                    return Ok(assetSaleResponse);
+                }
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
+        
+
 
     }
 }

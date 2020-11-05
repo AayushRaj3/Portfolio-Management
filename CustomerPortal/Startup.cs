@@ -25,7 +25,7 @@ namespace CustomerPortal
         {
             services.AddControllersWithViews();
 
-            services.AddDistributedMemoryCache();
+            //services.AddDistributedMemoryCache();
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromSeconds(20);//You can set Time   
             });

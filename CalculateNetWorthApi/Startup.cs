@@ -37,7 +37,7 @@ namespace CalculateNetWorthApi
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "My Api"
+                    Title = "My Api",
                 });
             });
         }
