@@ -10,19 +10,18 @@ namespace AuthorizationApi1.Provider
 {
     public class AuthenticationProvider : IAuthenticationProvider
     {
-        private readonly IAuthenticationRepository repo;
+        private readonly IAuthenticationRepository _repository;
 
-        public AuthenticationProvider(IAuthenticationRepository repo)
+        public AuthenticationProvider(IAuthenticationRepository repository)
         {
-            this.repo = repo;
+            this._repository = repository;
         }
-        public string GetToken1(User user)
+        public string GetToken(User user)
         {
-            var token = repo.GenerateToken(user);
+            var token = _repository.GenerateToken(user);
             if (token == null)
                 return null;
             return token;
-
         }
     }
 }

@@ -9,6 +9,6 @@ namespace AuthorizationApi1.Provider
 {
     public interface IAuthenticationProvider
     {
-        public string GetToken1(User user);
+        public string GetToken(User user);
     }
 }

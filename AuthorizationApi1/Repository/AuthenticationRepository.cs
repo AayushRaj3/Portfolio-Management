@@ -17,12 +17,12 @@ namespace AuthorizationApi1.Repository
             { 12345,"abc@123"},
             {67890,"test@123" }
         };
-        private readonly IConfiguration config;
+        private readonly IConfiguration _config;
 
      
         public AuthenticationRepository(IConfiguration config)
         {
-            this.config = config;
+            this._config = config;
         }
 
         public string GenerateToken(User user)
@@ -32,7 +32,7 @@ namespace AuthorizationApi1.Repository
                 return null;
             }
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(config["Jwt:key"]);
+            var key = Encoding.ASCII.GetBytes(_config["Jwt:key"]);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]

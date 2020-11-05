@@ -20,3 +20,19 @@ INFO  03:55:36 Hosting environment: Development
 INFO  03:55:36 Content root path: C:\Users\ACER\source\repos\AuthorizationApi1
 INFO  03:55:36 Content root path: C:\Users\ACER\source\repos\AuthorizationApi1
 INFO  03:55:56 Token review
+INFO  11:31:13 Application started. Press Ctrl+C to shut down.
+INFO  11:31:13 Application started. Press Ctrl+C to shut down.
+INFO  11:31:13 Hosting environment: Development
+INFO  11:31:13 Hosting environment: Development
+INFO  11:31:13 Content root path: C:\Users\ACER\source\repos\AuthorizationApi1
+INFO  11:31:13 Content root path: C:\Users\ACER\source\repos\AuthorizationApi1
+INFO  01:12:20 Application started. Press Ctrl+C to shut down.
+INFO  01:12:20 Application started. Press Ctrl+C to shut down.
+INFO  01:12:20 Hosting environment: Development
+INFO  01:12:20 Hosting environment: Development
+INFO  01:12:20 Content root path: C:\Users\ACER\source\repos\AuthorizationApi1
+INFO  01:12:20 Content root path: C:\Users\ACER\source\repos\AuthorizationApi1
+INFO  01:12:44 AuthenticateUser Initiated
+INFO  01:12:44 Not an authenticated user
+INFO  01:13:16 AuthenticateUser Initiated
+INFO  01:13:17 Authenticated user

@@ -17,22 +17,34 @@ namespace AuthorizationApi1.Controllers
     public class AuthController : ControllerBase
     {
         static readonly log4net.ILog _log4net = log4net.LogManager.GetLogger(typeof(AuthController));
-        private readonly IAuthenticationProvider provider;
+        private readonly IAuthenticationProvider _provider;
 
         public AuthController(IAuthenticationProvider provider)
         {
-            this.provider = provider;
+            this._provider = provider;
         }
 
         [AllowAnonymous]
-        [HttpPost("GetToken")]
-        public IActionResult GetToken(User user)
+        [HttpPost("AutheticateUser")]
+        public IActionResult AuthenticateUser(User user)
         {
-            _log4net.Info("Token review");
-            var token = provider.GetToken1(user);
-            if (token == null)
-                return Unauthorized();
-            return Ok(token);
+            try
+            {
+                _log4net.Info("AuthenticateUser Initiated");
+                var token = _provider.GetToken(user);
+                if (token == null)
+                {
+                    _log4net.Info("Not an authenticated user");
+                    return Unauthorized();
+                }
+                    _log4net.Info("Authenticated user");
+                    return Ok(token);
+            }
+            catch (Exception exception) 
+            {
+                _log4net.Info("Exception found!");
+                return BadRequest(exception.Message);
+            }
         }
     }
 }
