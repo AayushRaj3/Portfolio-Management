@@ -18,6 +18,7 @@ namespace StockApiTesting
 
         List<Stock> stocks = new List<Stock>();
         public IStockProvider stockpro;
+        public IStockRepository stockrepo;
 
         [SetUp]
         public void Setup()
@@ -29,25 +30,44 @@ namespace StockApiTesting
             };
 
             Mock<IStockProvider> mockpro = new Mock<IStockProvider>();
+            mockpro.Setup(m => m.GetStockByNameProvider(
+                It.IsAny<string>())).Returns((string s) => stocks.FirstOrDefault(
+                x => x.StockName == s));
+            stockpro = mockpro.Object;
 
-            mockpro.Setup(m => m.GetStockByName(
+            Mock<IStockRepository> mockrepo = new Mock<IStockRepository>();
+            mockrepo.Setup(m => m.GetStockByNameRepository(
                 It.IsAny<string>())).Returns((string s) => stocks.FirstOrDefault(
                 x => x.StockName == s));
 
-            stockpro = mockpro.Object;
-        }    
+            stockrepo = mockrepo.Object;
+        }
 
         [Test]
-        public void GetStockByName_PassCase()
+        public void GetStockByNameProvider_PassCase()
         {
-            Stock result = stockpro.GetStockByName("Dummy2");
+            Stock result = stockpro.GetStockByNameProvider("Dummy2");
             Assert.IsNotNull(result);
         }
 
         [Test]
-        public void GetStockByName_FailCase()
+        public void GetStockByNameProvider_FailCase()
         {
-            Stock result = stockpro.GetStockByName("ABC");
+            Stock result = stockpro.GetStockByNameProvider("ABC");
+            Assert.IsNull(result);
+        }
+
+        [Test]
+        public void GetStockByNameRepository_PassCase()
+        {
+            Stock result = stockrepo.GetStockByNameRepository("Dummy1");
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void GetStockByNameRepository_FailCase()
+        {
+            Stock result = stockrepo.GetStockByNameRepository("KBC");
             Assert.IsNull(result);
         }
     }

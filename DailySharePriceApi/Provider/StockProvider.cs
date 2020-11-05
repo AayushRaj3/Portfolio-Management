@@ -10,15 +10,15 @@ namespace DailySharePriceApi.Provider
 {
     public class StockProvider : IStockProvider
     {
-        private readonly IStockRepository repo;
+        private readonly IStockRepository _repo;
 
         public StockProvider(IStockRepository repo)
         {
-            this.repo = repo;
+            _repo = repo;
         }
-        public Stock GetStockByName(string name)
+        public Stock GetStockByNameProvider(string name)
         {
-            var data = repo.GetStockByName(name);
+            var data = _repo.GetStockByNameRepository(name);
             if(data == null)
             {
                 return null;

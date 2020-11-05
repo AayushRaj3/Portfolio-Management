@@ -18,7 +18,7 @@ namespace DailySharePriceApi.Repository
             new Stock {StockId = 103, StockName = "LTC", StockValue = 23.6}
         };
        
-        public Stock GetStockByName(string name)
+        public Stock GetStockByNameRepository(string name)
         {
             var stock = stocks.FirstOrDefault(s => s.StockName == name);
             if(stock == null)

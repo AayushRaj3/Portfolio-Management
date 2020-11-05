@@ -9,6 +9,6 @@ namespace DailySharePriceApi.Provider
 {
     public interface IStockProvider
     {
-        public Stock GetStockByName(string name);
+        public Stock GetStockByNameProvider(string name);
     }
 }

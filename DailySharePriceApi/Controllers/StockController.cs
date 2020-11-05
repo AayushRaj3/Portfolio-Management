@@ -16,27 +16,12 @@ namespace DailySharePriceApi.Controllers
     {
         static readonly log4net.ILog _log4net = log4net.LogManager.GetLogger(typeof(StockController));
 
-        private IStockProvider provider;
+        private readonly IStockProvider _provider;
 
         public StockController(IStockProvider provider)
         {
-            this.provider = provider;
+            _provider = provider;
         }
-
-        //[HttpGet]
-        //public IActionResult GetStock()
-        //{
-        //    try
-        //    {
-        //        _log4net.Info("StockController HttpGet GetStock");
-        //        var details = repo.GetStock();
-        //        return Ok(details);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
 
         [HttpGet("{name}")]
         public IActionResult GetStockByName(string name)
@@ -51,7 +36,7 @@ namespace DailySharePriceApi.Controllers
                 }
                 else
                 {
-                    var result = provider.GetStockByName(name.ToUpper());
+                    var result = _provider.GetStockByNameProvider(name.ToUpper());
                     if (result == null)
                     {
                         _log4net.Info("StockController Invalid Stock Name ");
@@ -66,30 +51,9 @@ namespace DailySharePriceApi.Controllers
             }
             catch (Exception ex)
             {
-                _log4net.Info("Stock COntroller Exception Found - " + ex.Message);
+                _log4net.Info("Stock Controller Exception Found - " + ex.Message);
                 return BadRequest(ex.Message);
             }
         }
-
-        //[HttpPost]
-        //public IActionResult AddStock(Stock s1)
-        //{
-        //    try
-        //    {
-        //        var result = repo.AddStock(s1);
-        //        if(result == null)
-        //        {
-        //            return BadRequest("Stock couldn't be added");
-        //        }
-        //        else
-        //        {
-        //            return Ok(s1);
-        //        }
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
     }
 }
