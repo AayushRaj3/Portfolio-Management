@@ -9,6 +9,6 @@ namespace DailyMutualFundNAVMicroservice.Provider
 {
     public interface IMutualProvider
     {
-        public MutualFundDetails GetDailyNAV(string name);
+        public MutualFundDetails GetMutualFundByNamePro(string name);
     }
 }

@@ -16,29 +16,38 @@ namespace DailyMutualFundNAVMicroservice.Controllers
     {
         static readonly log4net.ILog _log4net=log4net.LogManager.GetLogger(typeof(MutualFundNAVController));
         private readonly IMutualProvider pro;
-        public MutualFundNAVController(IMutualProvider pro)
+        public MutualFundNAVController(IMutualProvider _pro)
         {
-            this.pro = pro;
+            pro = _pro;
         }
         [HttpGet("{name}")]
-        public IActionResult GetByName(string name)
+        public IActionResult GetMutualFundDetailsByName(string name)
         {
             if (name == null)
             {
+                _log4net.Info("MutualFundNAVController Null Name");
                 return BadRequest();
             }
+            _log4net.Info("MutualFundController HttpGet GetMutualFundDetailsByName and " + name + " is searched");
             try
-            {
-                var data = pro.GetDailyNAV(name);
+            { 
+                var data = pro.GetMutualFundByNamePro(name);
                 if (data == null)
                 {
-                    return NotFound();
+                    _log4net.Info("MutualFundNAVController Invalid MutualFund Name ");
+                    return NotFound("Invalid MutualFund Name");
                 }
-                return Ok(data);
+                else
+                {
+                    _log4net.Info("MutualFundNAVController MutualFund Found");
+                    return Ok(data);
+                }
+                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                _log4net.Info("MutualFundNAVController Exception Found=" + ex.Message) ;
+                return BadRequest(ex.Message);
             }
         }
     }

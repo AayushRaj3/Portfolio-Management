@@ -11,13 +11,13 @@ namespace DailyMutualFundNAVMicroservice.Provider
     public class MutualProvider:IMutualProvider
     {
         private readonly IMutualFund repo;
-        public MutualProvider(IMutualFund repo)
+        public MutualProvider(IMutualFund _repo)
         {
-            this.repo = repo;
+            repo = _repo;
         }
-        public MutualFundDetails GetDailyNAV(string name)
+        public MutualFundDetails GetMutualFundByNamePro(string name)
         {
-            var data = repo.GetDailyNAV(name);
+            var data = repo.GetMutualFundByNameRepo(name);
             if (data==null)
             {
                 return null;

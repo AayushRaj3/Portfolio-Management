@@ -8,7 +8,6 @@ namespace DailyMutualFundNAVMicroservice.Repository
 {
     public interface IMutualFund
     {
-        public MutualFundDetails GetDailyNAV(string name);
-       
+        public MutualFundDetails GetMutualFundByNameRepo(string name);
     }
 }
