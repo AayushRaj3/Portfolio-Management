@@ -1477,3 +1477,18 @@ INFO  06:02:00 Selling the assets
 INFO  06:02:01 Calculating the networth
 INFO  06:02:01 Provider called from Controller to calculate the networth
 INFO  06:02:01 Calculating the networth in the repository method
+INFO  09:51:30 Application started. Press Ctrl+C to shut down.
+INFO  09:51:30 Hosting environment: Development
+INFO  09:51:30 Content root path: C:\Users\Kanika\source\repos\Portfolio Management\CalculateNetWorthApi
+INFO  10:02:03 Application started. Press Ctrl+C to shut down.
+INFO  10:02:03 Hosting environment: Development
+INFO  10:02:03 Content root path: C:\Users\Kanika\source\repos\Portfolio Management\CalculateNetWorthApi
+INFO  10:05:41 Application started. Press Ctrl+C to shut down.
+INFO  10:05:41 Hosting environment: Development
+INFO  10:05:41 Content root path: C:\Users\Kanika\source\repos\Portfolio Management\CalculateNetWorthApi
+INFO  10:10:28 Calculating the networth
+INFO  10:10:28 Provider called from Controller to calculate the networth
+INFO  10:10:30 Calculating the networth in the repository method
+INFO  10:14:15 Calculating the networth
+INFO  10:14:15 Provider called from Controller to calculate the networth
+INFO  10:14:15 Calculating the networth in the repository method

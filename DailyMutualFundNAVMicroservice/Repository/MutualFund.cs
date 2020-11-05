@@ -15,6 +15,8 @@ namespace DailyMutualFundNAVMicroservice.Repository
             new MutualFundDetails { MutualFundId = 2, MutualFundName = "SBI Nifty Index Fund", MutualFundValue = 100.14},
             new MutualFundDetails { MutualFundId = 3, MutualFundName = "Axis Liquid Fund", MutualFundValue = 2244.45}
         };
+
+        //This will return the MutualFund Details by name
           public MutualFundDetails GetMutualFundByNameRepo(string mfn)
           {
               if (mfn != null)

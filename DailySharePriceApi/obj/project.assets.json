@@ -2821,19 +2821,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dell\\.nuget\\packages\\": {}
+    "C:\\Users\\Kanika\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dell\\source\\repos\\DailySharePriceApi\\DailySharePriceApi.csproj",
+      "projectUniqueName": "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\DailySharePriceApi\\DailySharePriceApi.csproj",
       "projectName": "DailySharePriceApi",
-      "projectPath": "C:\\Users\\Dell\\source\\repos\\DailySharePriceApi\\DailySharePriceApi.csproj",
-      "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dell\\source\\repos\\DailySharePriceApi\\obj\\",
+      "projectPath": "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\DailySharePriceApi\\DailySharePriceApi.csproj",
+      "packagesPath": "C:\\Users\\Kanika\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\DailySharePriceApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Kanika\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

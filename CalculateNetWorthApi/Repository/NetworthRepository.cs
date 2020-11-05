@@ -24,13 +24,13 @@ namespace CalculateNetWorthApi.Repository
                     PortFolioId=12345,
                     MutualFundList = new List<MutualFundDetails>()
                     {
-                        new MutualFundDetails{MutualFundName = "Cred", MutualFundUnits=44},
-                        new MutualFundDetails{MutualFundName = "Viva", MutualFundUnits=66}
+                        new MutualFundDetails{MutualFundName = "Axis Liquid Fund", MutualFundUnits=20},
+                        new MutualFundDetails{MutualFundName = "Tata Equity PE Fund", MutualFundUnits=45}
                     },
                     StockList = new List<StockDetails>()
                     {
                         new StockDetails{StockCount = 19, StockName = "BTC"},
-                        new StockDetails{StockCount = 667, StockName = "ETH"}
+                        new StockDetails{StockCount = 67, StockName = "ETH"}
                     }
                 },
                 new PortFolioDetails
@@ -38,12 +38,12 @@ namespace CalculateNetWorthApi.Repository
                     PortFolioId = 789,
                     MutualFundList = new List<MutualFundDetails>()
                     {
-                        new MutualFundDetails{MutualFundName = "Udaan", MutualFundUnits=34},
-                        new MutualFundDetails{MutualFundName = "Viva", MutualFundUnits=566}
+                        new MutualFundDetails{MutualFundName = "Axis Liquid Fund", MutualFundUnits=34},
+                        new MutualFundDetails{MutualFundName = "Tata Equity PE Fund", MutualFundUnits=56}
                     },
                     StockList = new List<StockDetails>()
                     {
-                        new StockDetails{StockCount = 240, StockName = "BTC"},
+                        new StockDetails{StockCount = 20, StockName = "BTC"},
                         new StockDetails{StockCount = 46, StockName = "LTC"}
                     }
                 }
@@ -84,7 +84,7 @@ namespace CalculateNetWorthApi.Repository
                 {
                     foreach (MutualFundDetails x in pd.MutualFundList)
                     {
-                        using (var response = await httpClient.GetAsync("https://localhost:44394/api/MutualFund/" + x.MutualFundName))
+                        using (var response = await httpClient.GetAsync("https://localhost:55953/api/MutualFundNAV/" + x.MutualFundName))
                         {
                             string apiResponse = await response.Content.ReadAsStringAsync();
                             mf = JsonConvert.DeserializeObject<MutualFund>(apiResponse);
