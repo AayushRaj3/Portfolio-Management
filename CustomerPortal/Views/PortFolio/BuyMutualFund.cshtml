@@ -1,0 +1,24 @@
+﻿@model CustomerPortal.Models.MutualFundDetails
+
+@{
+    ViewData["Title"] = "BuyMutualFund";
+}
+
+<h1 class="bg-dark rounded text-white shadow-lg">Sell Your MutualFund</h1>
+<div class="col-md-4">
+    <form asp-action="BuyMutualFund">
+        <label asp-for="@Model.MutualFundName"></label>
+        <input class="form-control" asp-for="@Model.MutualFundName" />
+        <br />
+        <label asp-for="@Model.MutualFundUnits"></label>
+        <input class="form-control" asp-for="@Model.MutualFundUnits" />
+        <br />
+        <input type="submit" value="Sell" class="btn btn-success" />
+    </form>
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
