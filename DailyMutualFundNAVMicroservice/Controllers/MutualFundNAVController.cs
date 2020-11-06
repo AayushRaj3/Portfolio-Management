@@ -15,8 +15,8 @@ namespace DailyMutualFundNAVMicroservice.Controllers
     public class MutualFundNAVController : ControllerBase
     {
         static readonly log4net.ILog _log4net=log4net.LogManager.GetLogger(typeof(MutualFundNAVController));
-        private readonly IMutualProvider pro;
-        public MutualFundNAVController(IMutualProvider _pro)
+        private readonly IMutualFundProvider pro;
+        public MutualFundNAVController(IMutualFundProvider _pro)
         {
             pro = _pro;
         }
@@ -26,7 +26,7 @@ namespace DailyMutualFundNAVMicroservice.Controllers
             if (name == null)
             {
                 _log4net.Info("MutualFundNAVController Null Name");
-                return BadRequest();
+                return BadRequest("Name Cannot be null");
             }
             _log4net.Info("MutualFundController HttpGet GetMutualFundDetailsByName and " + name + " is searched");
             try
@@ -47,7 +47,7 @@ namespace DailyMutualFundNAVMicroservice.Controllers
             catch (Exception ex)
             {
                 _log4net.Info("MutualFundNAVController Exception Found=" + ex.Message) ;
-                return BadRequest(ex.Message);
+                return BadRequest("Internal Server Error");   
             }
         }
     }

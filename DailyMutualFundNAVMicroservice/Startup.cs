@@ -27,8 +27,8 @@ namespace DailyMutualFundNAVMicroservice
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<IMutualFund, MutualFund>();
-            services.AddScoped<IMutualProvider, MutualProvider>();
+            services.AddScoped<IMutualFundRepository, MutualFundRepository>();
+            services.AddScoped<IMutualFundProvider, MutualFundProvider>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
