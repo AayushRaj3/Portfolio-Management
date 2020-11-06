@@ -14,14 +14,20 @@ namespace AuthorizationApi1.Provider
 
         public AuthenticationProvider(IAuthenticationRepository repository)
         {
-            this._repository = repository;
+            _repository = repository;
         }
-        public string GetToken(User user)
+
+        public string Login(User user)
         {
-            var token = _repository.GenerateToken(user);
+            //IActionResult response = Unauthorized();
+            var token = _repository.Login(user);
             if (token == null)
+            {
                 return null;
+            }
+
             return token;
         }
+
     }
 }

@@ -33,25 +33,20 @@ namespace AuthorizationApi1
         {
             services.AddControllers();
             //var tokenKey = Configuration.GetValue<string>("TokenKey");
-            var key = Encoding.ASCII.GetBytes(Configuration["Jwt:key"]);
-
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+       .AddJwtBearer(options =>
+       {
+           options.TokenValidationParameters = new TokenValidationParameters
+           {
+               ValidateIssuer = true,
+               ValidateAudience = true,
+               ValidateLifetime = true,
+               ValidateIssuerSigningKey = true,
+               ValidIssuer = Configuration["Jwt:Issuer"],
+               ValidAudience = Configuration["Jwt:Issuer"],
+               IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+           };
+       });
 
             services.AddScoped<IAuthenticationProvider, AuthenticationProvider>();
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();

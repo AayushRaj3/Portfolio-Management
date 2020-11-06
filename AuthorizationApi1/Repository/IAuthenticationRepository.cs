@@ -8,6 +8,8 @@ namespace AuthorizationApi1.Repository
 {
     public interface IAuthenticationRepository
     {
-        public string GenerateToken(User user);
+        public string GenerateJSONWebToken(User user);
+        public User AuthenticateUser(User user);
+        public string Login(User login);
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthorizationApi1.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -21,30 +21,38 @@ namespace AuthorizationApi1.Controllers
 
         public AuthController(IAuthenticationProvider provider)
         {
-            this._provider = provider;
+            _log4net.Info("AuthController constructor initiated.");
+            _provider = provider;
         }
 
-        [AllowAnonymous]
-        [HttpPost("AutheticateUser")]
-        public IActionResult AuthenticateUser(User user)
+        [HttpPost]
+        public IActionResult Login(User user)
         {
+            _log4net.Info("AuthController Login method initiated.");
             try
             {
-                _log4net.Info("AuthenticateUser Initiated");
-                var token = _provider.GetToken(user);
-                if (token == null)
+                IActionResult response = Unauthorized();
+                var token = _provider.Login(user);
+
+                if (token != null)
                 {
-                    _log4net.Info("Not an authenticated user");
-                    return Unauthorized();
+                    _log4net.Info("Token received.");
+                    response = Ok(new { tokenString = token });
                 }
-                    _log4net.Info("Authenticated user");
-                    return Ok(token);
+                _log4net.Info("Response is given user is authorized or unauthorized.");
+                return response;
+                
             }
-            catch (Exception exception) 
+            catch(Exception exception)
             {
-                _log4net.Info("Exception found!");
-                return BadRequest(exception.Message);
+                _log4net.Info("Exception found in AuthController Login method="+exception.Message);
+                return BadRequest("Some Internal Server Error Occurred!!");
             }
         }
+        
+
+        
+
+
     }
 }
