@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\StockApiTesting\\StockApiTesting.csproj": {}
+    "C:\\Users\\Dell\\source\\repos\\StockApiTesting\\StockApiTesting.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\DailySharePriceApi\\DailySharePriceApi.csproj": {
+    "C:\\Users\\Dell\\source\\repos\\DailySharePriceApi\\DailySharePriceApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\DailySharePriceApi\\DailySharePriceApi.csproj",
+        "projectUniqueName": "C:\\Users\\Dell\\source\\repos\\DailySharePriceApi\\DailySharePriceApi.csproj",
         "projectName": "DailySharePriceApi",
-        "projectPath": "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\DailySharePriceApi\\DailySharePriceApi.csproj",
-        "packagesPath": "C:\\Users\\Kanika\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\DailySharePriceApi\\obj\\",
+        "projectPath": "C:\\Users\\Dell\\source\\repos\\DailySharePriceApi\\DailySharePriceApi.csproj",
+        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dell\\source\\repos\\DailySharePriceApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Kanika\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -73,17 +73,17 @@
         }
       }
     },
-    "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\StockApiTesting\\StockApiTesting.csproj": {
+    "C:\\Users\\Dell\\source\\repos\\StockApiTesting\\StockApiTesting.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\StockApiTesting\\StockApiTesting.csproj",
+        "projectUniqueName": "C:\\Users\\Dell\\source\\repos\\StockApiTesting\\StockApiTesting.csproj",
         "projectName": "StockApiTesting",
-        "projectPath": "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\StockApiTesting\\StockApiTesting.csproj",
-        "packagesPath": "C:\\Users\\Kanika\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\StockApiTesting\\obj\\",
+        "projectPath": "C:\\Users\\Dell\\source\\repos\\StockApiTesting\\StockApiTesting.csproj",
+        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dell\\source\\repos\\StockApiTesting\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Kanika\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -96,8 +96,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\DailySharePriceApi\\DailySharePriceApi.csproj": {
-                "projectPath": "C:\\Users\\Kanika\\source\\repos\\Portfolio Management\\DailySharePriceApi\\DailySharePriceApi.csproj"
+              "C:\\Users\\Dell\\source\\repos\\DailySharePriceApi\\DailySharePriceApi.csproj": {
+                "projectPath": "C:\\Users\\Dell\\source\\repos\\DailySharePriceApi\\DailySharePriceApi.csproj"
               }
             }
           }

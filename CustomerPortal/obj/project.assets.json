@@ -6143,19 +6143,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\user\\.nuget\\packages\\": {}
+    "C:\\Users\\Dell\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MFPE\\CustomerPortal\\CustomerPortal.csproj",
+      "projectUniqueName": "C:\\Users\\Dell\\source\\repos\\Portfolio Management\\CustomerPortal\\CustomerPortal.csproj",
       "projectName": "CustomerPortal",
-      "projectPath": "D:\\MFPE\\CustomerPortal\\CustomerPortal.csproj",
-      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "D:\\MFPE\\CustomerPortal\\obj\\",
+      "projectPath": "C:\\Users\\Dell\\source\\repos\\Portfolio Management\\CustomerPortal\\CustomerPortal.csproj",
+      "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dell\\source\\repos\\Portfolio Management\\CustomerPortal\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

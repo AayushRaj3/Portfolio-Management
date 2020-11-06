@@ -39,8 +39,8 @@ namespace DailySharePriceApi.Controllers
                     var result = _provider.GetStockByNameProvider(name.ToUpper());
                     if (result == null)
                     {
-                        _log4net.Info("StockController Invalid Stock Name ");
-                        return BadRequest("Invalid Stock Name");
+                        _log4net.Info("StockController Stock " + name + "Not Found");
+                        return NotFound("Stock Not Found");
                     }
                     else
                     {
@@ -52,7 +52,7 @@ namespace DailySharePriceApi.Controllers
             catch (Exception ex)
             {
                 _log4net.Info("Stock Controller Exception Found - " + ex.Message);
-                return BadRequest(ex.Message);
+                return BadRequest("Internal Server Error");
             }
         }
     }
